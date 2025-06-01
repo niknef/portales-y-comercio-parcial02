@@ -24,28 +24,24 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Middleware\IsAdmin;
 //Usamos el controlador para la las Noticias de river
 use App\Http\Controllers\NoticiaController;
-// Usamos el controlador para las compras
-use App\Http\Controllers\CompraController;
 // Usamos el controlador para los usuarios
 use App\Http\Controllers\UserController;
 
 
 // LLamando al Metodo Index
 // vista home
-Route::get('/', [HomeController::class, 'index'])->name('home'); 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Listado de articulos
-Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index'); 
+Route::get('/articulos', [ArticuloController::class, 'index'])->name('articulos.index');
 
 //Listado de articulos por Id (DETALLE DE ARTICULO)
 //Correxion de la ruta ( /{id})
 Route::get('/articulos/{id}', [ArticuloController::class, 'detalle'])
     ->name('articulos.detalle')
-    ->whereNumber('id'); 
+    ->whereNumber('id');
 
-// Ruta para agregar una compra al carrito
-Route::post('/articulos/{articulo_id}', [CompraController::class, 'store'])->name('compras.store');
 
 //Ruta para vista de contacto
 Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto');
@@ -62,7 +58,7 @@ Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias.ind
 // Middleware esta dentro de App-> Http-> Middleware->IsAdmin   
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    
+
 
     Route::get('/admin/{seccion}', [AdminController::class, 'mostrarSeccion'])->name('admin.section');
 
@@ -87,7 +83,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
     Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
 });
-    
+
 // Rutas para la autenticación
 
 // Ruta para mostrar el formulario de inicio de sesión

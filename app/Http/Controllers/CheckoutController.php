@@ -7,6 +7,8 @@ use App\Models\Orden;
 use App\Models\OrdenItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResumenCompra;
 
 class CheckoutController extends Controller
 {
@@ -23,7 +25,7 @@ class CheckoutController extends Controller
         $total = $items->sum(fn($item) => $item->articulo->precio * $item->cantidad);
 
         return view('checkout.index', compact('items', 'total'));
-    }
+    } 
 
     public function store()
     {
@@ -54,6 +56,12 @@ class CheckoutController extends Controller
                 'precio_unitario' => $item->articulo->precio,
             ]);
         }
+
+        // Cargar relaciones necesarias para el resumen
+        $orden->load('items.articulo', 'usuario');
+
+        // Enviar correo con resumen de compra
+        Mail::to($user->email)->send(new ResumenCompra($orden));
 
         // Vaciar carrito
         $carrito->items()->delete();
