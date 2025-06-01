@@ -5,6 +5,7 @@ Este proyecto fue desarrollado como parte del trabajo práctico de la materia **
 Se trata de un sitio web dinámico hecho con **Laravel 11**, que simula una tienda oficial de River Plate, con funcionalidades como:
 
 - Listado de artículos (camisetas, productos oficiales)
+- Carrito de compras
 - CRUD para administración de artículos, talles y categorías
 - Sistema de autenticación y administración de usuarios
 - Diseño responsive con Bootstrap 5
