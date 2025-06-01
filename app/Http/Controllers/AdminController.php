@@ -9,6 +9,7 @@ use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Mensaje;
 use App\Models\Noticia;
+use App\Models\Orden;
 
 class AdminController extends Controller
 {
@@ -39,9 +40,16 @@ class AdminController extends Controller
         $usuarios = User::all();
         $mensajes = Mensaje::orderBy('fecha_envio', 'desc')->get();
         $noticias = Noticia::all();
-        
-    
+        $ordenes = Orden::with(['usuario', 'items.articulo'])->orderBy('fecha_compra', 'desc')->get();
 
-        return view("admin.secciones.$seccion", compact('articulos', 'talles', 'categorias', 'usuarios', 'mensajes','noticias' ));
+        return view("admin.secciones.$seccion", compact(
+            'articulos',
+            'talles',
+            'categorias',
+            'usuarios',
+            'mensajes',
+            'noticias',
+            'ordenes'
+        ));
     }
 }

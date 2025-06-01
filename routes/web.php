@@ -62,6 +62,7 @@ Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias.ind
 // Middleware esta dentro de App-> Http-> Middleware->IsAdmin   
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    
 
     Route::get('/admin/{seccion}', [AdminController::class, 'mostrarSeccion'])->name('admin.section');
 
@@ -112,3 +113,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/carrito/{id}', [CarritoController::class, 'update'])->name('carrito.update');
     Route::delete('/carrito/{id}', [CarritoController::class, 'destroy'])->name('carrito.destroy');
 });
+
+use App\Http\Controllers\CheckoutController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/confirmacion', [CheckoutController::class, 'confirmacion'])->name('checkout.confirmacion');
+});
+
+
+use App\Http\Controllers\PerfilController;
+
+Route::middleware(['auth'])->get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');

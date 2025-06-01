@@ -25,6 +25,15 @@
 
 <body class="d-flex flex-column min-vh-100">
     <!-- NAVBAR -->
+     @if(auth()->check() && auth()->user()->role === 'admin')
+    <div class="bg-dark text-white py-2 px-3 d-flex justify-content-end align-items-center">
+        
+        <a href="{{ route('admin.index') }}" class="btn btn-sm btn-light">
+            <i class="fas fa-cogs me-1"></i> Ir al panel de administración
+        </a>
+    </div>
+@endif
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
             <div class="container">
@@ -54,6 +63,7 @@
                         <li class="nav-item px-2 py-2">
                             <a class="nav-link text-uppercase text-dark" href="{{ url('/noticias') }}">Noticias</a>
                         </li>
+                        
                         @if(auth()->check())
 
     @php
@@ -75,9 +85,11 @@
 </li>
 
 
-    <li
-        class="nav-item px-2 py-2 text-center text-uppercase fw-semibold d-lg-flex justify-content-lg-start align-items-lg-center">
+    <li class="nav-item px-2 py-2">
+    <a class="nav-link text-uppercase text-dark " href="{{ route('perfil.index') }}">
         {{ auth()->user()->name }}
+    </a>
+    
     </li>
     <li
         class="nav-item px-2 py-2 text-center d-lg-flex justify-content-lg-start align-items-lg-center">
