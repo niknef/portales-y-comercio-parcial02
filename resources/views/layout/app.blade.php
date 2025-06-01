@@ -55,41 +55,47 @@
                             <a class="nav-link text-uppercase text-dark" href="{{ url('/noticias') }}">Noticias</a>
                         </li>
                         @if(auth()->check())
-                            @if(auth()->user()->role === 'admin')
-                                <li class="nav-item px-2 py-2">
-                                    <a class="nav-link text-uppercase text-dark"
-                                        href="{{ route('admin.index') }}">Administración</a>
-                                </li>
-                                {{-- @elseif(auth()->user()->role === 'user')
-                                <li class="nav-item px-2 py-2">
-                                    <a class="nav-link text-uppercase text-dark" href="{{ url('/carrito') }}">Carrito</a>
-                                </li> --}}
-                            @endif
-                        @endif
 
-                        @if (auth()->check())
+    @php
+        $carritoActivo = auth()->user()->carrito()->where('activo', true)->first();
+        $cantidadEnCarrito = $carritoActivo ? $carritoActivo->items()->sum('cantidad') : 0;
+    @endphp
 
-                            <li
-                                class="nav-item px-2 py-2 text-center text-uppercase fw-semibold d-lg-flex justify-content-lg-start align-items-lg-center">
-                                {{ auth()->user()->name }}
-                            </li>
-                            <li
-                                class="nav-item px-2 py-2 text-center d-lg-flex justify-content-lg-start align-items-lg-center">
-                                <form method="POST" action="{{ route('auth.logout') }}" class="m-0">
-                                    @csrf
-                                    <button type="submit"
-                                        class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
-                                        style="height: 40px;">
-                                        <i class="bi bi-box-arrow-right"></i> Salir
-                                    </button>
-                                </form>
-                            </li>
+    <li class="nav-item px-2 py-2 d-flex justify-content-center justify-content-lg-start align-items-center w-100 w-lg-auto">
+    <a class="nav-link text-dark position-relative" href="{{ route('carrito.index') }}" title="Ver carrito">
+        @if($cantidadEnCarrito > 0)
+            <i class="fas fa-shopping-cart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ $cantidadEnCarrito }}
+            </span>
+        @else
+            <i class="fas fa-cart-arrow-down text-muted"></i>
+        @endif
+    </a>
+</li>
 
-                        @else
-                            <li class="nav-item px-2 py-2">
-                                <a class="nav-link text-uppercase text-dark" href="{{ url('/login') }}">Login</a>
-                            </li>
-                        @endif
+
+    <li
+        class="nav-item px-2 py-2 text-center text-uppercase fw-semibold d-lg-flex justify-content-lg-start align-items-lg-center">
+        {{ auth()->user()->name }}
+    </li>
+    <li
+        class="nav-item px-2 py-2 text-center d-lg-flex justify-content-lg-start align-items-lg-center">
+        <form method="POST" action="{{ route('auth.logout') }}" class="m-0">
+            @csrf
+            <button type="submit"
+                class="btn btn-danger btn-sm d-inline-flex align-items-center gap-2"
+                style="height: 40px;">
+                <i class="bi bi-box-arrow-right"></i> Salir
+            </button>
+        </form>
+    </li>
+
+@else
+    <li class="nav-item px-2 py-2">
+        <a class="nav-link text-uppercase text-dark" href="{{ url('/login') }}">Login</a>
+    </li>
+@endif
                     </ul>
                 </div>
             </div>

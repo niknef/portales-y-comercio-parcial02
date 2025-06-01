@@ -104,5 +104,11 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 // Ruta para Deslogearse
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+use App\Http\Controllers\CarritoController;
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
+    Route::post('/carrito', [CarritoController::class, 'store'])->name('carrito.store');
+    Route::put('/carrito/{id}', [CarritoController::class, 'update'])->name('carrito.update');
+    Route::delete('/carrito/{id}', [CarritoController::class, 'destroy'])->name('carrito.destroy');
+});
