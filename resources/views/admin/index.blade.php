@@ -26,6 +26,10 @@
             <div class="col">
                 <a href="{{ route('admin.section', ['seccion' => 'noticias']) }}" class="btn btn-info w-100 p-4 text-black fs-5 fw-medium">📰 Noticias</a>
             </div>
+            <div class="col">
+                <a href="{{ route('admin.section', ['seccion' => 'ventas']) }}" class="btn btn-dark w-100 p-4 text-white fs-5 fw-medium">💰 Ventas</a>
+            </div>
+
         </div>
     @else
         {{-- Si hay una sección activa, mostrar los botones normales --}}
@@ -36,6 +40,7 @@
             <a href="{{ route('admin.section', ['seccion' => 'usuarios']) }}" class="btn btn-danger fw-medium">Usuarios</a>
             <a href="{{ route('admin.section', ['seccion' => 'mensajes']) }}" class="btn btn-warning fw-medium">Mensajes</a>
             <a href="{{ route('admin.section', ['seccion' => 'noticias']) }}" class="btn btn-info fw-medium">Noticias</a>
+            <a href="{{ route('admin.section', ['seccion' => 'ventas']) }}" class="btn btn-dark fw-medium">Ventas</a>
         </div>
     @endif
 

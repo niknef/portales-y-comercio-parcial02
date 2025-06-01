@@ -15,7 +15,7 @@
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Rol</th>
-                        <th>Compras</th>
+                        <th>Ordenes</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -28,12 +28,13 @@
                             <td>{{ $usuario->role }}</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-3">
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#verComprasModal{{ $usuario->id }}">
-                                        Ver Compras
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verOrdenesModal{{ $usuario->id }}">
+                                        Órdenes
                                     </button>
+
                                 </div>
                             </td>
+
                             <td>
                                 <div class="d-flex justify-content-center gap-3">
                                     <button class="btn btn-warning" data-bs-toggle="modal"
@@ -45,6 +46,7 @@
                         </tr>
                         @include('partials.usuario.editar-modal', ['usuario' => $usuario])
                         @include('partials.usuario.eliminar-modal', ['usuario' => $usuario])
+                        @include('partials.usuario.ordenes-modal', ['usuario' => $usuario])
                     @endforeach
                 </tbody>
             </table>

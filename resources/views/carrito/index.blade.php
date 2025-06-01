@@ -65,7 +65,7 @@
         <a href="{{ route('articulos.index') }}" class="btn btn-outline-secondary">
             <i class="fas fa-plus me-1"></i> Seguir comprando
         </a>
-        <a href="#" class="btn btn-success">
+        <a href="{{ route('checkout.index') }}" class="btn btn-success">
             <i class="fas fa-shopping-cart me-1"></i> Finalizar Compra
         </a>
     </div>

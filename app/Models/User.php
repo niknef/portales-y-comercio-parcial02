@@ -33,18 +33,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
     
     public function carrito()
     {
         return $this->hasOne(Carrito::class);
     }
 
-   
-    public function compras()
+    public function ordenes()
     {
-        return $this->hasMany(Compra::class);
+        return $this->hasMany(Orden::class);
     }
 
+   
     public function mensajes()
     {
         return $this->hasMany(Mensaje::class);
