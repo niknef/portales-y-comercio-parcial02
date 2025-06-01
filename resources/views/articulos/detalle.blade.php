@@ -60,12 +60,23 @@
                     <strong>Lanzamiento:</strong> {{ $articulo->fecha_creacion }}
                 </li>
             </ul>
-            <form class="mt-4">
+            <form action="{{ route('carrito.store') }}" method="POST" class="mt-2 d-flex gap-2 align-items-center w-50">
                 @csrf
-                <button class="btn btn-dark btn-lg px-4">
-                    <i class="bi bi-cart-plus me-2"></i>Agregar al carrito
+                <input type="hidden" name="articulo_id" value="{{ $articulo->articulo_id }}">
+                
+                <input type="number"
+                    name="cantidad"
+                    value="1"
+                    min="1"
+                    class="form-control form-control-sm w-25 align-self-center m-0"
+                    >
+                
+                <button type="submit" class="btn btn-detalles btn-sm">
+                    <i class="fas fa-cart-plus me-1"></i> Agregar al carrito
                 </button>
             </form>
+
+
         </div>
     </div>
 </div>
